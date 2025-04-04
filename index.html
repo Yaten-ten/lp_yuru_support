@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ゆるサポート - 業務の効率化をもっとゆるやかに</title>
+    <meta name="description" content="個人開発だからこそできる、あなたに寄り添ったIT支援サービス">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --text: #1f2937;
+            --light: #f9fafb;
+            --dark: #111827;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .accent-gradient {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero {
+            height: 100vh;
+            background-image: url('/images/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .nav-logo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .swiper {
+            width: 100%;
+            padding-bottom: 50px;
+        }
+        
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            height: 350px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: var(--primary);
+        }
+        
+        .parallax-section {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 130%;
+            background-image: url('/images/parallax-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            transform: translateY(0);
+            z-index: -1;
+        }
+        
+        .parallax-content {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .scroll-animation {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ナビゲーション・ロゴ -->
+    <nav class="nav-logo">
+        <div class="logo-text">ゆるサポート</div>
+        <div class="hidden md:block">
+            <a href="#features" class="px-4 text-gray-700 hover:text-indigo-600">特徴</a>
+            <a href="#services" class="px-4 text-gray-700 hover:text-indigo-600">サービス</a>
+            <a href="#about" class="px-4 text-gray-700 hover:text-indigo-600">自己紹介</a>
+            <a href="#contact" class="px-4 text-gray-700 hover:text-indigo-600">お問い合わせ</a>
+        </div>
+    </nav>
+
+    <!-- ヒーローセクション -->
+    <section class="hero flex items-center justify-center">
+        <div class="hero-content text-center text-white px-4">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">一人だからこそ、<br>あなたに寄り添えるIT支援</h1>
+            <p class="text-xl md:text-2xl mb-8">業務の効率化を、もっとゆるやかに</p>
+            <a href="#contact" class="bg-white text-indigo-600 font-medium py-3 px-8 rounded-full hover:bg-indigo-100 transition duration-300 inline-block">お問い合わせ</a>
+        </div>
+    </section>
+
+    <!-- 特徴紹介 -->
+    <section id="features" class="py-20 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 scroll-animation">ゆるサポートの<span class="accent-gradient">5つの特徴</span></h2>
+            
+            <div class="swiper mySwiper scroll-animation">
+                <div class="swiper-wrapper">
+                    <!-- 特徴1 -->
+                    <div class="swiper-slide bg-white p-8">
+                        <div class="h-full flex flex-col justify-between">
+                            <div>
+                                <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mb-6">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-4">迅速な開発スピード</h3>
+                                <p class="text-gray-600">大きな組織よりも意思決定が速く、無駄な工程を省いた効率的な開発を実現します。あなたのビジネスニーズにすばやく対応します。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 特徴2 -->
+                    <div class="swiper-slide bg-white p-8">
+                        <div class="h-full flex flex-col justify-between">
+                            <div>
+                                <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mb-6">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-4">コスト効率の良さ</h3>
+                                <p class="text-gray-600">個人開発だからこそ可能な低コスト構造。余分な管理コストや人件費を削減し、高品質なサービスを適正価格で提供します。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 特徴3 -->
+                    <div class="swiper-slide bg-white p-8">
+                        <div class="h-full flex flex-col justify-between">
+                            <div>
+                                <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mb-6">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-4">直接コミュニケーション</h3>
+                                <p class="text-gray-600">開発者に直接相談できるので、要望がしっかり伝わります。中間層がないため、情報伝達のロスがありません。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 特徴4 -->
+                    <div class="swiper-slide bg-white p-8">
+                        <div class="h-full flex flex-col justify-between">
+                            <div>
+                                <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mb-6">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-4">柔軟なカスタマイズ</h3>
+                                <p class="text-gray-600">あなたのビジネスに合わせた柔軟なシステム開発が可能です。大手ベンダーのような固定的なパッケージではなく、必要な機能だけを実装します。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 特徴5 -->
+                    <div class="swiper-slide bg-white p-8">
+                        <div class="h-full flex flex-col justify-between">
+                            <div>
+                                <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mb-6">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-4">継続的なサポート</h3>
+                                <p class="text-gray-600">開発だけで終わらず、導入後のサポートもしっかり提供します。システムの安定運用やアップデートを継続的にサポートします。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- サービス詳細 -->
+    <section id="services" class="parallax-section py-20">
+        <div class="parallax-bg"></div>
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="parallax-content p-8 md:p-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center scroll-animation">提供<span class="accent-gradient">サービス</span></h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 scroll-animation">
+                    <div class="feature-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">業務効率化システムの開発</h3>
+                        <p class="text-gray-600">日々の業務をスムーズにするための効率化システムを開発します。単純作業の自動化から複雑な業務フローの最適化まで、あなたのニーズに合わせたシステムを提供します。</p>
+                    </div>
+                    
+                    <div class="feature-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">ペーパーレス化支援</h3>
+                        <p class="text-gray-600">紙の書類を電子化し、管理・共有を効率化します。データベース構築からドキュメント管理システムの導入まで、ペーパーレス化のプロセス全体をサポートします。</p>
+                    </div>
+                    
+                    <div class="feature-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">カスタムツール開発</h3>
+                        <p class="text-gray-600">既存のツールでは対応できない特殊なニーズに対して、オーダーメイドのツールを開発します。あなたの業務に特化した使いやすいツールで、作業効率を大幅に向上させます。</p>
+                    </div>
+                    
+                    <div class="feature-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">IT導入コンサルティング</h3>
+                        <p class="text-gray-600">最適なIT環境構築のためのアドバイスを提供します。現状分析から導入計画策定、実装までトータルでサポートし、効率的かつ経済的なIT活用を実現します。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 自己紹介セクション -->
+    <section id="about" class="py-20 px-4 bg-gray-50">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 scroll-animation">開発者<span class="accent-gradient">紹介</span></h2>
+            
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden scroll-animation">
+                <div class="md:flex">
+                    <div class="md:w-1/3">
+                        <img src="/images/developer.jpg" 
+                             alt="開発者の写真" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8 md:w-2/3">
+                        <h3 class="text-2xl font-bold mb-4">「個人開発」という強み</h3>
+                        <p class="text-gray-700 mb-6">
+                            長年システムエンジニアとして培った経験を活かし、一人ひとりのお客様に合わせたシステム開発を提供しています。個人開発者だからこそできる柔軟な対応と、お客様との直接的なコミュニケーションを大切にしています。
+                        </p>
+                        <p class="text-gray-700 mb-6">
+                            開発から導入、その後のサポートまで一貫して対応するため、システムの全体像を把握した上で効率的な開発・運用が可能です。大企業では実現が難しい「小回りの利く」サービス提供を心がけています。
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <div class="text-3xl font-bold text-indigo-600">10年+</div>
+                                <div class="text-gray-600">システム開発経験</div>
+                            </div>
+                            <!--
+                            <div>
+                                <div class="text-3xl font-bold text-indigo-600">100%</div>
+                                <div class="text-gray-600">自社内開発</div>
+                            </div>
+                            -->
+                        </div>
+                        <p class="text-gray-700 italic">
+                            「ゆるく初めてがっつり改善する」がモットーです。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA セクション -->
+    <section id="contact" class="py-20 px-4 gradient-bg text-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 scroll-animation">お問い合わせ</h2>
+            <p class="text-xl mb-10 scroll-animation">業務効率化やペーパーレス化についてのご相談、お見積もりのご依頼など、お気軽にご連絡ください。</p>
+            
+            <div class="bg-white rounded-xl p-8 shadow-lg mb-8 scroll-animation">
+                <p class="text-gray-800 mb-4">メールでのお問い合わせ</p>
+                <a href="mailto:info@yuru-tech.net" class="text-2xl font-bold text-indigo-600 hover:text-indigo-800 transition duration-300">info@yuru-tech.net</a>
+            </div>
+            
+            <p class="text-sm opacity-90 scroll-animation">通常、24時間以内にご返信いたします。</p>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="py-10 px-4 bg-gray-900 text-gray-400">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="text-xl font-bold text-white mb-2">ゆるサポート</div>
+                    <p class="text-sm">業務効率化・ペーパーレス化の個人開発サービス</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#features" class="hover:text-white transition duration-300">特徴</a>
+                    <a href="#services" class="hover:text-white transition duration-300">サービス</a>
+                    <a href="#about" class="hover:text-white transition duration-300">開発者紹介</a>
+                    <a href="#contact" class="hover:text-white transition duration-300">お問い合わせ</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
+                <p>&copy; 2025 ゆるサポート. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/ScrollTrigger.min.js"></script>
+    
+    <script>
+        // スワイパー初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            const swiper = new Swiper(".mySwiper", {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 1,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                    },
+                },
+            });
+            
+            // スクロールアニメーション
+            gsap.registerPlugin(ScrollTrigger);
+            
+            const scrollAnimElements = document.querySelectorAll('.scroll-animation');
+            scrollAnimElements.forEach(element => {
+                gsap.fromTo(element, 
+                    { opacity: 0, y: 20 },
+                    { 
+                        opacity: 1, 
+                        y: 0, 
+                        duration: 0.7,
+                        scrollTrigger: {
+                            trigger: element,
+                            start: "top 80%",
+                        }
+                    }
+                );
+            });
+            
+            // パララックス効果
+            const parallaxBg = document.querySelector('.parallax-bg');
+            if (parallaxBg) {
+                gsap.to(parallaxBg, {
+                    y: "-30%",
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".parallax-section",
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
